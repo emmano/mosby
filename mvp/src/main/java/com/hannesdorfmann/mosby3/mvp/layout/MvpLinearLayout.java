@@ -111,10 +111,6 @@ public abstract class MvpLinearLayout<V extends MvpView, P extends MvpPresenter<
     return presenter;
   }
 
-  @Override public void setPresenter(P presenter) {
-    this.presenter = presenter;
-  }
-
   @Override public V getMvpView() {
     return (V) this;
   }

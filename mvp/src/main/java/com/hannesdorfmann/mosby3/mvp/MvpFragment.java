@@ -20,11 +20,11 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.Fragment;
 import android.view.View;
-import com.hannesdorfmann.mosby3.mvp.delegate.FragmentMvpDelegateImpl;
+
 import com.hannesdorfmann.mosby3.mvp.delegate.FragmentMvpDelegate;
+import com.hannesdorfmann.mosby3.mvp.delegate.FragmentMvpDelegateImpl;
 import com.hannesdorfmann.mosby3.mvp.delegate.MvpDelegateCallback;
 
 /**
@@ -77,10 +77,10 @@ public abstract class MvpFragment<V extends MvpView, P extends MvpPresenter<V>> 
   @NonNull @Override public P getPresenter() {
     return presenter;
   }
-
-  @Override public void setPresenter(@NonNull P presenter) {
-    this.presenter = presenter;
-  }
+//TODO: get from Activity's injector
+//  @Override public void setPresenter(@NonNull P presenter) {
+//    this.presenter = presenter;
+//  }
 
   @NonNull @Override public V getMvpView() {
     return (V) this;

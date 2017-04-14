@@ -239,6 +239,6 @@ public class FragmentMvpViewStateDelegateImplTest {
     Mockito.when(activity.isChangingConfigurations()).thenReturn(changingConfigurations);
     Mockito.when(activity.isFinishing()).thenReturn(isFinishing);
     finishFragment(delegate, bundle);
-    Mockito.verify(presenter, Mockito.times(detachViewCount)).detachView(expectKeepPresenter);
+    Mockito.verify(presenter, Mockito.times(detachViewCount)).detachView();
   }
 }

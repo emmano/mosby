@@ -17,9 +17,8 @@
 package com.hannesdorfmann.mosby3.mvp.viewstate.lce;
 
 import android.view.View;
+
 import com.hannesdorfmann.mosby3.mvp.MvpPresenter;
-import com.hannesdorfmann.mosby3.mvp.delegate.ActivityMvpDelegate;
-import com.hannesdorfmann.mosby3.mvp.delegate.ActivityMvpViewStateDelegateImpl;
 import com.hannesdorfmann.mosby3.mvp.delegate.MvpViewStateDelegateCallback;
 import com.hannesdorfmann.mosby3.mvp.lce.MvpLceActivity;
 import com.hannesdorfmann.mosby3.mvp.lce.MvpLceView;
@@ -37,14 +36,6 @@ public abstract class MvpLceViewStateActivity<CV extends View, M, V extends MvpL
 
   protected LceViewState<M, V> viewState;
   protected boolean restoringViewState = false;
-
-  @Override protected ActivityMvpDelegate<V, P> getMvpDelegate() {
-    if (mvpDelegate == null) {
-      mvpDelegate = new ActivityMvpViewStateDelegateImpl<>(this, this, true);
-    }
-
-    return mvpDelegate;
-  }
 
   @Override public LceViewState<M, V> getViewState() {
     return viewState;

@@ -177,7 +177,7 @@ public class ViewGroupMviDelegateImpl<V extends MvpView, P extends MviPresenter<
           PresenterManager.remove(activity, mosbyViewId);
         }
         mosbyViewId = null;
-        presenter.detachView(false);
+        presenter.detachView();
       } else {
         boolean detachedBecauseOrientationChange = ActivityMviDelegateImpl.retainPresenterInstance(
             keepPresenterDuringScreenOrientationChange, activity);
@@ -191,7 +191,7 @@ public class ViewGroupMviDelegateImpl<V extends MvpView, P extends MviPresenter<
                 + presenter
                 + " temporarily because of orientation change");
           }
-          presenter.detachView(true);
+          presenter.detachView();
         } else {
           // view detached, i.e. because of back stack / navigation
           /*
@@ -210,7 +210,7 @@ public class ViewGroupMviDelegateImpl<V extends MvpView, P extends MviPresenter<
       }
     } else {
       // retain instance feature disabled
-      presenter.detachView(false);
+      presenter.detachView();
       if (mosbyViewId != null) { // mosbyViewId == null if keepPresenterDuringScreenOrientationChange == false
         PresenterManager.remove(activity, mosbyViewId);
       }

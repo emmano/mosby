@@ -43,7 +43,7 @@ public class MvpBasePresenterTest {
     };
 
     presenter.attachView(mvpView);
-    presenter.detachView(false);
+    presenter.detachView();
     assertViewNotAttachedAndNull(presenter);
   }
 
@@ -68,11 +68,11 @@ public class MvpBasePresenterTest {
     assertViewAttachedAndNotNull(presenter);
     assertEquals(presenter.getView(), view);
 
-    presenter.detachView(true);
+    presenter.detachView();
     assertViewNotAttachedAndNull(presenter);
 
     presenter.attachView(view);
-    presenter.detachView(false);
+    presenter.detachView();
     assertViewNotAttachedAndNull(presenter);
   }
 

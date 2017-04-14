@@ -16,7 +16,6 @@
 
 package com.hannesdorfmann.mosby3.mvp;
 
-import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;
 
 import java.lang.ref.WeakReference;
@@ -42,7 +41,7 @@ import java.lang.ref.WeakReference;
  * are not living in a perfect world. Let's say you use an AsyncTask to make an http request and
  * the Presenter gets the result back and updates the View. If you forget to cancel this AsyncTask
  * after the View has been destroyed (i.e. android back button pressed, {@link
- * MvpPresenter#detachView(boolean)} will be called) then you can run into the scenario that the
+ * MvpPresenter#detachView()} will be called) then you can run into the scenario that the
  * View is detached from Presenter and then the Presenter gets the result back from AsyncTask and
  * wants to update the View which is null (because detached). So the `isViewAttached()` check is
  * basically some kind of safety net. In a perfect implementation you wouldn't need the {@link
@@ -99,7 +98,7 @@ public class MvpBasePresenter<V extends MvpView> implements MvpPresenter<V> {
   }
 
   @UiThread
-  @Override public void detachView(boolean retainInstance) {
+  @Override public void detachView() {
     if (viewRef != null) {
       viewRef.clear();
       viewRef = null;

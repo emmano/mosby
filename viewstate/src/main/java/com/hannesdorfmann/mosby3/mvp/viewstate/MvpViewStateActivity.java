@@ -19,8 +19,6 @@ package com.hannesdorfmann.mosby3.mvp.viewstate;
 import com.hannesdorfmann.mosby3.mvp.MvpActivity;
 import com.hannesdorfmann.mosby3.mvp.MvpPresenter;
 import com.hannesdorfmann.mosby3.mvp.MvpView;
-import com.hannesdorfmann.mosby3.mvp.delegate.ActivityMvpDelegate;
-import com.hannesdorfmann.mosby3.mvp.delegate.ActivityMvpViewStateDelegateImpl;
 import com.hannesdorfmann.mosby3.mvp.delegate.MvpViewStateDelegateCallback;
 
 /**
@@ -44,14 +42,6 @@ public abstract class MvpViewStateActivity<V extends MvpView, P extends MvpPrese
    * A simple flag that indicates if the restoring ViewState  is in progress right now.
    */
   protected boolean restoringViewState = false;
-
-  @Override protected ActivityMvpDelegate<V, P> getMvpDelegate() {
-    if (mvpDelegate == null) {
-      mvpDelegate = new ActivityMvpViewStateDelegateImpl<>(this, this, true);
-    }
-
-    return mvpDelegate;
-  }
 
   @Override public VS getViewState() {
     return viewState;

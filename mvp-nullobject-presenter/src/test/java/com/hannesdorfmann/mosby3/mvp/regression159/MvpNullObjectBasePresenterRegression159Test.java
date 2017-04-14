@@ -45,7 +45,7 @@ public class MvpNullObjectBasePresenterRegression159Test {
     presenter.attachView(spyView);
     presenter.invokeAMethodOnView();
     Assert.assertEquals(1, invocations.get());
-    presenter.detachView(true);
+    presenter.detachView();
 
     // Invoke a method while view is detached. This should invoke the method on the null view
     presenter.invokeAMethodOnView();
@@ -54,7 +54,7 @@ public class MvpNullObjectBasePresenterRegression159Test {
     presenter.attachView(spyView);
     presenter.invokeAMethodOnView();
     Assert.assertEquals(2, invocations.get());
-    presenter.detachView(false);
+    presenter.detachView();
 
     // Invoke a method while view is detached. This should invoke the method on the null view
     presenter.invokeAMethodOnView();

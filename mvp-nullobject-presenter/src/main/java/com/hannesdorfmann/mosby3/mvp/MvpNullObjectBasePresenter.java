@@ -9,7 +9,7 @@ import java.lang.reflect.Type;
 /**
  * A {@link MvpPresenter} implmenetation that implements the <a href="https://en.wikipedia.org/wiki/Null_Object_pattern">null
  * object pattern</a> for the attached mvp view. So whenever the view gets detached from this
- * presenter by calling{@link #detachView(boolean)}, a new "null object" view gets dynamically
+ * presenter by calling{@link MvpPresenter#detachView()}, a new "null object" view gets dynamically
  * instantiated by using reflections and set as the current
  * view (instead of null). The new "null object" view simply does nothing. This avoids
  * NullPointerExceptions and checks like {@code if (getView() != null)}
@@ -113,7 +113,7 @@ public abstract class MvpNullObjectBasePresenter<V extends MvpView> implements M
     return nullView;
   }
 
-  @UiThread @Override public void detachView(boolean retainInstance) {
+  @UiThread @Override public void detachView() {
     if (view != null) {
       view.clear();
       view = null;

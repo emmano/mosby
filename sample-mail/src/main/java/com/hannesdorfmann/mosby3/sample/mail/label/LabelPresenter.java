@@ -5,9 +5,12 @@ import com.hannesdorfmann.mosby3.sample.mail.model.event.MailLabelChangedEvent;
 import com.hannesdorfmann.mosby3.sample.mail.model.mail.Label;
 import com.hannesdorfmann.mosby3.sample.mail.model.mail.Mail;
 import com.hannesdorfmann.mosby3.sample.mail.model.mail.MailProvider;
-import de.greenrobot.event.EventBus;
+
 import java.util.List;
+
 import javax.inject.Inject;
+
+import de.greenrobot.event.EventBus;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -30,8 +33,8 @@ public class LabelPresenter extends BaseRxLcePresenter<LabelView, List<Label>> {
     eventBus.register(this);
   }
 
-  @Override public void detachView(boolean retainInstance) {
-    super.detachView(retainInstance);
+  @Override public void detachView() {
+    super.detachView();
     eventBus.unregister(this);
   }
 

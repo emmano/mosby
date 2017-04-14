@@ -42,5 +42,5 @@ public interface MvpPresenter<V extends MvpView> {
    * <code>Activity.detachView()</code> or <code>Fragment.onDestroyView()</code>
    */
   @UiThread
-  void detachView(boolean retainInstance);
+  void detachView();
 }

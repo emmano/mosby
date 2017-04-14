@@ -191,6 +191,6 @@ public class ActivityMvpViewStateDelegateImplTestNew {
     delegate.onDestroy();
     delegate.onRestart();
 
-    Mockito.verify(presenter, Mockito.times(detachViewCount)).detachView(expectKeepPresenter);
+    Mockito.verify(presenter, Mockito.times(detachViewCount)).detachView();
   }
 }

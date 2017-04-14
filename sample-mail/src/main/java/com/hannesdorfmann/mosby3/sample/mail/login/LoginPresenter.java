@@ -83,8 +83,8 @@ public class LoginPresenter extends MvpBasePresenter<LoginView> {
     }
   }
 
-  @Override public void detachView(boolean retainInstance) {
-    super.detachView(retainInstance);
+  @Override public void detachView() {
+    super.detachView();
     if (!retainInstance) {
       cancelSubscription();
     }

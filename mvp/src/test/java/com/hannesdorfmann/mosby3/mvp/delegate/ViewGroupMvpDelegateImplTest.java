@@ -24,10 +24,7 @@ import com.hannesdorfmann.mosby3.mvp.MvpPresenter;
 import com.hannesdorfmann.mosby3.mvp.MvpView;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 /**
  * @author Hannes Dorfmann
@@ -142,6 +139,6 @@ public class ViewGroupMvpDelegateImplTest {
 
     delegate.onDetachedFromWindow();
 
-    Mockito.verify(presenter, Mockito.times(detachCount)).detachView(expectKeepPresenter);
+    Mockito.verify(presenter, Mockito.times(detachCount)).detachView();
   }
 }

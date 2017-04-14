@@ -188,6 +188,6 @@ public class ViewGroupMvpViewStateDelegateImplTest {
 
     delegate.onDetachedFromWindow();
 
-    Mockito.verify(presenter, Mockito.times(detachCount)).detachView(expectKeepPresenter);
+    Mockito.verify(presenter, Mockito.times(detachCount)).detachView();
   }
 }

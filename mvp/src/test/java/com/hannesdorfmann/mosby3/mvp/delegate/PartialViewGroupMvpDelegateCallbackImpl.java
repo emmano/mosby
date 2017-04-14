@@ -32,7 +32,4 @@ public abstract class PartialViewGroupMvpDelegateCallbackImpl
     return presenter;
   }
 
-  @Override public void setPresenter(MvpPresenter<MvpView> presenter) {
-    this.presenter = presenter;
-  }
 }

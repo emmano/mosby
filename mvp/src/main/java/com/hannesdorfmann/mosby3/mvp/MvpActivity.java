@@ -18,9 +18,8 @@ package com.hannesdorfmann.mosby3.mvp;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import com.hannesdorfmann.mosby3.mvp.delegate.ActivityMvpDelegate;
-import com.hannesdorfmann.mosby3.mvp.delegate.ActivityMvpDelegateImpl;
 
 /**
  * An Activity that uses a {@link MvpPresenter} to implement a Model-View-Presenter
@@ -30,101 +29,60 @@ import com.hannesdorfmann.mosby3.mvp.delegate.ActivityMvpDelegateImpl;
  * @since 1.0.0
  */
 public abstract class MvpActivity<V extends MvpView, P extends MvpPresenter<V>>
-    extends AppCompatActivity implements MvpView,
-    com.hannesdorfmann.mosby3.mvp.delegate.MvpDelegateCallback<V,P> {
+        extends AppCompatActivity implements MvpView,
+        com.hannesdorfmann.mosby3.mvp.delegate.MvpDelegateCallback<V, P> {
 
-  protected ActivityMvpDelegate mvpDelegate;
-  protected P presenter;
-  protected boolean retainInstance;
+    protected P presenter;
 
-  @Override protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    getMvpDelegate().onCreate(savedInstanceState);
-  }
-
-  @Override protected void onDestroy() {
-    super.onDestroy();
-    getMvpDelegate().onDestroy();
-  }
-
-  @Override protected void onSaveInstanceState(Bundle outState) {
-    super.onSaveInstanceState(outState);
-    getMvpDelegate().onSaveInstanceState(outState);
-  }
-
-  @Override protected void onPause() {
-    super.onPause();
-    getMvpDelegate().onPause();
-  }
-
-  @Override protected void onResume() {
-    super.onResume();
-    getMvpDelegate().onResume();
-  }
-
-  @Override protected void onStart() {
-    super.onStart();
-    getMvpDelegate().onStart();
-  }
-
-  @Override protected void onStop() {
-    super.onStop();
-    getMvpDelegate().onStop();
-  }
-
-  @Override protected void onRestart() {
-    super.onRestart();
-    getMvpDelegate().onRestart();
-  }
-
-  @Override public void onContentChanged() {
-    super.onContentChanged();
-    getMvpDelegate().onContentChanged();
-  }
-
-  @Override protected void onPostCreate(Bundle savedInstanceState) {
-    super.onPostCreate(savedInstanceState);
-    getMvpDelegate().onPostCreate(savedInstanceState);
-  }
-
-  /**
-   * Instantiate a presenter instance
-   *
-   * @return The {@link MvpPresenter} for this view
-   */
-  @NonNull public abstract P createPresenter();
-
-  /**
-   * Get the mvp delegate. This is internally used for creating presenter, attaching and detaching
-   * view from presenter.
-   *
-   * <p><b>Please note that only one instance of mvp delegate should be used per Activity
-   * instance</b>.
-   * </p>
-   *
-   * <p>
-   * Only override this method if you really know what you are doing.
-   * </p>
-   *
-   * @return {@link ActivityMvpDelegateImpl}
-   */
-  @NonNull protected ActivityMvpDelegate<V, P> getMvpDelegate() {
-    if (mvpDelegate == null) {
-      mvpDelegate = new ActivityMvpDelegateImpl(this, this, true);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        P retainedPresenter = getRetainedPresenter();
+        if (retainedPresenter != null) {
+            presenter = retainedPresenter;
+        }
+        if (presenter == null) {
+            presenter = createPresenter();
+        }
+        presenter.attachView((V) this);
     }
 
-    return mvpDelegate;
-  }
+    @Nullable
+    @Override
+    public P getLastNonConfigurationInstance() {
+        return presenter;
+    }
 
-  @NonNull @Override public P getPresenter() {
-    return presenter;
-  }
+    private P getRetainedPresenter() {
+        return (P) super.getLastCustomNonConfigurationInstance();
+    }
 
-  @Override public void setPresenter(@NonNull P presenter) {
-    this.presenter = presenter;
-  }
+    @Override
+    public P onRetainCustomNonConfigurationInstance() {
+        return presenter;
+    }
 
-  @NonNull @Override public V getMvpView() {
-    return (V) this;
-  }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.detachView();
+    }
+
+    /**
+     * Instantiate a presenter instance
+     *
+     * @return The {@link MvpPresenter} for this view
+     */
+    @NonNull
+    public abstract P createPresenter();
+
+    @Override
+    public V getMvpView() {
+        return (V) this;
+    }
+
+    @Override
+    public P getPresenter() {
+        return presenter;
+    }
 }

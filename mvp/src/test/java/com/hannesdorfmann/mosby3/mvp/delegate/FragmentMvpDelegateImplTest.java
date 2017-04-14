@@ -170,6 +170,6 @@ public class FragmentMvpDelegateImplTest {
 
     finishFragment(delegate, bundle);
 
-    Mockito.verify(presenter, Mockito.times(detachViewCount)).detachView(expectKeepPresenter);
+    Mockito.verify(presenter, Mockito.times(detachViewCount)).detachView();
   }
 }

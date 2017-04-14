@@ -24,11 +24,14 @@ import android.support.v4.app.BackstackAccessor;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
+
 import com.hannesdorfmann.mosby3.PresenterManager;
 import com.hannesdorfmann.mosby3.mvp.MvpPresenter;
 import com.hannesdorfmann.mosby3.mvp.MvpView;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.util.UUID;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
  * * The default implementation of {@link FragmentMvpDelegate}
@@ -161,7 +164,7 @@ public class FragmentMvpDelegateImpl<V extends MvpView, P extends MvpPresenter<V
           "Oops, Presenter is null. This seems to be a Mosby internal bug. Please report this issue here: https://github.com/sockeqwe/mosby/issues");
     }
 
-    delegateCallback.setPresenter(presenter);
+//    delegateCallback.setPresenter(presenter);
     getPresenter().attachView(getMvpView());
 
     if (DEBUG) {
@@ -223,7 +226,7 @@ public class FragmentMvpDelegateImpl<V extends MvpView, P extends MvpPresenter<V
     boolean retainPresenterInstance = retainPresenterInstance();
 
     P presenter = getPresenter();
-    presenter.detachView(retainPresenterInstance);
+    presenter.detachView();
     if (!retainPresenterInstance && mosbyViewId != null) { // mosbyViewId is null if keepPresenterInstanceDuringScreenOrientationChanges  == false
       PresenterManager.remove(activity, mosbyViewId);
     }

@@ -21,13 +21,16 @@ import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
+
 import com.hannesdorfmann.mosby3.PresenterManager;
 import com.hannesdorfmann.mosby3.mvp.MvpPresenter;
 import com.hannesdorfmann.mosby3.mvp.MvpView;
 import com.hannesdorfmann.mosby3.mvp.viewstate.RestorableParcelableViewState;
 import com.hannesdorfmann.mosby3.mvp.viewstate.ViewState;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.util.UUID;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
  * A {@link ViewGroupMvpDelegate} that supports {@link ViewState}
@@ -232,7 +235,7 @@ public class ViewGroupMvpViewStateDelegateImpl<V extends MvpView, P extends MvpP
       delegateCallback.setRestoringViewState(true);
     }
 
-    delegateCallback.setPresenter(presenter);
+//    delegateCallback.setPresenter(presenter);
     presenter.attachView(view);
     if (DEBUG) {
       Log.d(DEBUG_TAG,
@@ -284,7 +287,7 @@ public class ViewGroupMvpViewStateDelegateImpl<V extends MvpView, P extends MvpP
           PresenterManager.remove(activity, mosbyViewId);
         }
         mosbyViewId = null;
-        presenter.detachView(false);
+        presenter.detachView();
       } else {
         boolean detachedBecauseOrientationChange =
             ActivityMvpDelegateImpl.retainPresenterInstance(keepPresenter, activity);
@@ -298,7 +301,7 @@ public class ViewGroupMvpViewStateDelegateImpl<V extends MvpView, P extends MvpP
                 + presenter
                 + " temporarily because of orientation change");
           }
-          presenter.detachView(true);
+          presenter.detachView();
         } else {
           // view detached, i.e. because of back stack / navigation
           /*
@@ -326,7 +329,7 @@ public class ViewGroupMvpViewStateDelegateImpl<V extends MvpView, P extends MvpP
             + " permanently");
       }
 
-      presenter.detachView(false);
+      presenter.detachView();
       if (mosbyViewId != null) { // mosbyViewId == null if keepPresenter == false
         PresenterManager.remove(activity, mosbyViewId);
       }

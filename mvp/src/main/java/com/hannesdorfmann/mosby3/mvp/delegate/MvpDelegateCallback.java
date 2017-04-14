@@ -56,7 +56,6 @@ public interface MvpDelegateCallback<V extends MvpView, P extends MvpPresenter<V
    *
    * @param presenter The presenter instance
    */
-  void setPresenter(P presenter);
 
   /**
    * Get the MvpView for the presenter

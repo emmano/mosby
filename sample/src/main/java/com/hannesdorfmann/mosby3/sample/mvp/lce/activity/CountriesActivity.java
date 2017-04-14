@@ -21,8 +21,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import com.hannesdorfmann.mosby3.mvp.lce.MvpLceActivity;
 import com.hannesdorfmann.mosby3.sample.R;
 import com.hannesdorfmann.mosby3.sample.mvp.CountriesAdapter;
@@ -33,6 +31,9 @@ import com.hannesdorfmann.mosby3.sample.mvp.lce.SimpleCountriesPresenter;
 import com.hannesdorfmann.mosby3.sample.mvp.model.Country;
 
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class CountriesActivity
     extends MvpLceActivity<SwipeRefreshLayout, List<Country>, CountriesView, CountriesPresenter>

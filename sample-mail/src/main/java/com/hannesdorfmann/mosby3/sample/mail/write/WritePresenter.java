@@ -1,6 +1,7 @@
 package com.hannesdorfmann.mosby3.sample.mail.write;
 
 import android.content.Context;
+
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
 import com.hannesdorfmann.mosby3.sample.mail.IntentStarter;
 import com.hannesdorfmann.mosby3.sample.mail.model.event.LoginSuccessfulEvent;
@@ -8,8 +9,10 @@ import com.hannesdorfmann.mosby3.sample.mail.model.event.MailSentErrorEvent;
 import com.hannesdorfmann.mosby3.sample.mail.model.event.MailSentEvent;
 import com.hannesdorfmann.mosby3.sample.mail.model.event.NotAuthenticatedEvent;
 import com.hannesdorfmann.mosby3.sample.mail.model.mail.Mail;
-import de.greenrobot.event.EventBus;
+
 import javax.inject.Inject;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * @author Hannes Dorfmann
@@ -62,8 +65,8 @@ public class WritePresenter extends MvpBasePresenter<WriteView> {
     eventBus.register(this);
   }
 
-  @Override public void detachView(boolean retainInstance) {
-    super.detachView(retainInstance);
+  @Override public void detachView() {
+    super.detachView();
     eventBus.unregister(this);
   }
 }

@@ -20,6 +20,8 @@ package com.hannesdorfmann.mosby3.mvi;
 import android.support.annotation.CallSuper;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
+
+import com.hannesdorfmann.mosby3.mvp.MvpPresenter;
 import com.hannesdorfmann.mosby3.mvp.MvpView;
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
@@ -66,7 +68,7 @@ import java.util.List;
  * </p>
  *
  * <p>
- * Please note that the methods {@link #attachView(MvpView)} and {@link #detachView(boolean)}
+ * Please note that the methods {@link #attachView(MvpView)} and {@link MvpPresenter#detachView()}
  * should
  * not be overridden unless you have a really good reason to do so. Usually {@link #bindIntents()}
  * and {@link #unbindIntents()} should be enough.
@@ -262,12 +264,12 @@ public abstract class MviBasePresenter<V extends MvpView, VS> implements MviPres
     viewAttachedFirstTime = false;
   }
 
-  @Override @CallSuper public void detachView(boolean retainInstance) {
-    if (!retainInstance) {
+  @Override @CallSuper public void detachView() {
+//    if (!retainInstance) {
       if (viewStateDisposable != null) {
         // Cancel the overall observable stream
         viewStateDisposable.dispose();
-      }
+//      }
 
       unbindIntents();
       reset();

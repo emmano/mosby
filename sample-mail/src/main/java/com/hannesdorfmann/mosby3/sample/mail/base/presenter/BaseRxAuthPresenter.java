@@ -61,8 +61,8 @@ public class BaseRxAuthPresenter<V extends AuthView<M>, M> extends BaseRxLcePres
     eventBus.register(this);
   }
 
-  @Override public void detachView(boolean retainInstance) {
-    super.detachView(retainInstance);
+  @Override public void detachView() {
+    super.detachView();
     eventBus.unregister(this);
   }
 }
